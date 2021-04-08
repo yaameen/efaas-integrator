@@ -14,41 +14,17 @@ class eFaasParser {
 
     public function parse($object)
     {
-        // name	varchar(255)	 
-    // name_dv	varchar(255)	 
-    // gender	enum('male','female','other')	 
-    // date_of_birth	date	 
-    // identity_number	varchar(255) NULL	 
-    // passport_number	varchar(255) NULL	 
-    // permanent_address_id	int(10) unsigned	 
-    // current_address_id	int(10) unsigned NULL	 
-
-
-    // "name": "Mohamed KG Farish",
-    // "given_name": "Mohamed",
-    // "family_name": "Farish",
-    // "middle_name": "",
-    // "gender": "M",
-    // "idnumber": "A099420",
-    // "email": "faishknights@gmdail.com",
-    // "phone_number": "9939900",
-    // "address": "{\"AddressLine1\": \" Light Garden\", \"AddressLine2\": \" \", \"Road\": \" \", \"AtollAbbreviation\": \"K\", \"IslandName\": \"Male'\", \"HomeNameDhivehi\": \"ލައިޓްގާރޑްން\", \"Ward\": \"Maafannu\", \"Country\": \"462\" }",
-    // "fname_dhivehi": "މުޙައްމަދު",
-    // "mname_dhivehi": "",
-    // "lname_dhivehi": "ފާރިޝް",
-    // "user_type": "1",
-    // "verification_level": "300",
-    // "user_state": "3",
-    // "birthdate": "10/28/1987",
-    // "passport_number": "",
-    // "is_workpermit_active": "False",
-    // "updated_at": "9/10/2013 8:56:58 AM",
-    // "sub": "c2c2f269-571d-433c-b51a-cc7eee8041f8"
         $genders = [
             'M' => 'male',
             'F' => 'female',
         ];
         $response = json_decode($object);
+
+        // assuming if the returned payload includes the name, the rest of the profile would exist.
+        if( !property_exists($response, 'name') ) {
+            throw new \Exception("You must provide access to your profile on eFaas");
+        }
+
         return new Collection([
             'id' => $response->sub,
             'name' => $response->name,
@@ -68,8 +44,7 @@ class eFaasParser {
 
     public function parseToken($response)
     {
-        $response = json_decode($response);
-        return $response;
+        return json_decode($response);
     }
     
 }
