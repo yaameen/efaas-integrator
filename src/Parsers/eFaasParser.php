@@ -3,6 +3,7 @@
 namespace eFaasIntegrator\Parsers;
 
 use Carbon\Carbon;
+use eFaasIntegrator\exceptions\AccessDeniedToProfileException;
 use Illuminate\Support\Collection;
 
 class eFaasParser {
@@ -22,7 +23,7 @@ class eFaasParser {
 
         // assuming if the returned payload includes the name, the rest of the profile would exist.
         if( !property_exists($response, 'name') ) {
-            throw new \Exception("You must provide access to your profile on eFaas");
+            throw new AccessDeniedToProfileException("You must provide access to your profile on eFaas");
         }
 
         return new Collection([
