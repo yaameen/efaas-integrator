@@ -33,6 +33,8 @@ class eFaasParser {
             'gender' => $genders[$response->gender] ?? 'other',
             'date_of_birth' => Carbon::parse($response->birthdate),
             'identity_number' => $response->idnumber,
+            'phone_number' => $response->phone_number,
+            'email' => $response->email,
             'user_state' => (int)$response->user_state,
             'verification_level' => (int)$response->verification_level,
             'user_type' => (int)$response->user_type,
