@@ -9,10 +9,9 @@ return [
     'grant_type' =>  env('EFAAS_GRANT_TYPE', 'authorization_code'),
     'scope' =>  env('EFAAS_SCOPE', 'openid profile'),
 
-
     'oauth_route' =>  env('EFAAS_OAUTH_ROUTE', 'https://developer.egov.mv/efaas/connect'),
     'token_route' =>  env('EFAAS_TOKEN_ROUTE', 'https://developer.egov.mv/efaas/connect/token'),
-    
+
     'session_name' =>  env('EFAAS_SESSION_NAME', 'openid profile'),
 
     'end_session_uri' => env('EFAAS_END_SESSION_URI', 'https://developer.egov.mv/efaas/connect/endsession'),
@@ -24,5 +23,5 @@ return [
     ],
 
     'user_model' => App\User::class,
-    
+
 ];

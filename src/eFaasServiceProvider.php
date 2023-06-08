@@ -8,34 +8,34 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
-class eFaasServiceProvider extends ServiceProvider {
+class eFaasServiceProvider extends ServiceProvider
+{
 
-     /**
+    /**
      * Boot the application services.
      *
      * @return void
      */
     public function boot()
     {
-        Event::listen(Logout::class, function(){
+        Event::listen(Logout::class, function () {
             app('efaas')->efaasLogout();
         });
 
-        
+
         $this->registerRoutes();
 
-        $this->loadViewsFrom(__DIR__.'/views', 'efaas');
+        $this->loadViewsFrom(__DIR__ . '/views', 'efaas');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/config/efaas.php' => config_path('efaas.php'),
+                __DIR__ . '/config/efaas.php' => config_path('efaas.php'),
             ], 'config');
-            
+
             $this->publishes([
-                __DIR__.'/views' => $this->app->resourcePath('views/vendor/efaas'),
+                __DIR__ . '/views' => $this->app->resourcePath('views/vendor/efaas'),
             ], 'views');
         }
-
     }
 
     /**
@@ -49,7 +49,7 @@ class eFaasServiceProvider extends ServiceProvider {
             return new eFaasIntegrator();
         });
 
-        $this->mergeConfigFrom(__DIR__.'/config/efaas.php', 'efaas');
+        $this->mergeConfigFrom(__DIR__ . '/config/efaas.php', 'efaas');
     }
 
 
@@ -74,7 +74,6 @@ class eFaasServiceProvider extends ServiceProvider {
     {
         // dd( __DIR__ . ('/routes.php'));
 
-        Route::namespace('eFaasIntegrator')->middleware('web')->group( __DIR__ . ('/routes.php'));
+        Route::namespace('eFaasIntegrator')->middleware('web')->group(__DIR__ . ('/routes.php'));
     }
-
 }

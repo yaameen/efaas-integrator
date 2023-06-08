@@ -1,6 +1,7 @@
 <?php
+
 namespace eFaasIntegrator\exceptions;
 
-class AccessDeniedToProfileException extends \Exception {
-
+class AccessDeniedToProfileException extends \Exception
+{
 }

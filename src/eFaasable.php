@@ -2,7 +2,7 @@
 
 namespace eFaasIntegrator;
 
-trait eFaasable {
-
+trait eFaasable
+{
     abstract function makeUser($data = []);
 }

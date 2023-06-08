@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use eFaasIntegrator\GrantTypes\Hybrid;
 use eFaasIntegrator\GrantTypes\Implicit;
 
-class eFaasIntegrator {
+class eFaasIntegrator
+{
 
     public function buildQuery()
     {
@@ -21,25 +22,25 @@ class eFaasIntegrator {
             'nonce' => Str::random(10),
             'state' => Str::random(10),
         ]);
-            
-        return config('efaas.oauth_route').'/authorize?'.$query;
+
+        return config('efaas.oauth_route') . '/authorize?' . $query;
     }
-    
-    public function buildLogoutQuery()
+
+    public function buildLogoutQuery($id_token, $session_state)
     {
         $query = http_build_query([
-            'id_token_hint' => session()->get('efaas.id_token'),
-            'post_logout_redirect_uris' => 'https://online-services.test',
-            'state' => session()->get('efaas.session_state') 
+            'id_token_hint' => $id_token,
+            'post_logout_redirect_uris' => [config('efaas.post_logout_redirect_uri')],
+            'state' => $session_state,
 
         ]);
-        return config('efaas.end_session_uri').'?'.$query;
+        return config('efaas.end_session_uri') . '?' . $query;
     }
 
     public function efaasLogout()
     {
-        if( session('efaas') ) {
-            abort( redirect($this->buildLogoutQuery()));
+        if (session('efaas')) {
+            abort(redirect($this->buildLogoutQuery()));
         }
     }
 
@@ -50,7 +51,7 @@ class eFaasIntegrator {
 
     public function setSession($data)
     {
-        if(!session('efaas')) {
+        if (!session('efaas')) {
             session()->put('efaas', $data);
         }
 
@@ -62,7 +63,7 @@ class eFaasIntegrator {
     {
         $grant_type = $this->makeGrantType();
 
-        if($user = $grant_type->getUser()) {
+        if ($user = $grant_type->getUser()) {
             Auth::login($user, true);
             return $user;
         }
@@ -72,7 +73,7 @@ class eFaasIntegrator {
 
     public function home()
     {
-        if($intended = session('url.intended')) {
+        if ($intended = session('url.intended')) {
             session()->forget('url.intended');
             return url($intended);
         }
@@ -81,7 +82,7 @@ class eFaasIntegrator {
 
     public function flush()
     {
-        if(request()->hasSession()) {
+        if (request()->hasSession()) {
             request()->session()->flush();
         }
         Auth::logout();
@@ -104,11 +105,10 @@ class eFaasIntegrator {
             'Implicit' => Implicit::class,
         ];
 
-        if(array_key_exists($grant_type, $available_grants)) {
-            return $available_grants[$grant_type]; 
+        if (array_key_exists($grant_type, $available_grants)) {
+            return $available_grants[$grant_type];
         }
 
         throw new Exception("Invalid grant type for eFaas.");
     }
-
 }

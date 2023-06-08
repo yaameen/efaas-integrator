@@ -1,6 +1,8 @@
 {
   "name": "yaameen/efaas-integrator",
   "description": "eFaas Integration Package",
+  "license": "MIT",
+  "version": "1.0.5",
   "authors": [
     {
       "name": "Yameen Mohamed",
@@ -8,8 +10,8 @@
     }
   ],
   "require": {
-    "illuminate/support": "^10.0",
-    "guzzlehttp/guzzle": "^7.5"
+    "illuminate/support": "^8.0",
+    "guzzlehttp/guzzle": "^7.1"
   },
   "autoload": {
     "psr-4": {
