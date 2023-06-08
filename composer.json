@@ -2,7 +2,7 @@
   "name": "yaameen/efaas-integrator",
   "description": "eFaas Integration Package",
   "license": "MIT",
-  "version": "v1.0.5",
+  "version": "v1.0.6",
   "authors": [
     {
       "name": "Yameen Mohamed",
@@ -10,7 +10,7 @@
     }
   ],
   "require": {
-    "illuminate/support": "^8.0",
+    "illuminate/support": "*",
     "guzzlehttp/guzzle": "^7.1"
   },
   "autoload": {
@@ -24,5 +24,8 @@
         "eFaasIntegrator\\eFaasServiceProvider"
       ]
     }
+  },
+  "require-dev": {
+    "laravel/laravel": "^8.6"
   }
 }

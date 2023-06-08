@@ -22,19 +22,12 @@ class eFaasServiceProvider extends ServiceProvider
             app('efaas')->efaasLogout();
         });
 
-
         $this->registerRoutes();
-
-        $this->loadViewsFrom(__DIR__ . '/views', 'efaas');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/config/efaas.php' => config_path('efaas.php'),
             ], 'config');
-
-            $this->publishes([
-                __DIR__ . '/views' => $this->app->resourcePath('views/vendor/efaas'),
-            ], 'views');
         }
     }
 

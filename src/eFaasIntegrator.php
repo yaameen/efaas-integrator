@@ -18,6 +18,7 @@ class eFaasIntegrator
             'redirect_uri' => config('efaas.redirect_uri'),
             'response_type' => config('efaas.response_type'),
             'scope' => config('efaas.scope'),
+            'response_mode' => 'form_post',
             'grant_type' => config('efaas.grant_type'),
             'nonce' => Str::random(10),
             'state' => Str::random(10),
@@ -30,7 +31,7 @@ class eFaasIntegrator
     {
         $query = http_build_query([
             'id_token_hint' => $id_token,
-            'post_logout_redirect_uris' => [config('efaas.post_logout_redirect_uri')],
+            'post_logout_redirect_uri' => config('efaas.post_logout_redirect_uri'),
             'state' => $session_state,
 
         ]);
@@ -40,7 +41,9 @@ class eFaasIntegrator
     public function efaasLogout()
     {
         if (session('efaas')) {
-            abort(redirect($this->buildLogoutQuery()));
+            $id_token = session()->get('efaas.id_token');
+            $session_state = session()->get('efaas.session_state');
+            abort(redirect($this->buildLogoutQuery($id_token, $session_state)));
         }
     }
 

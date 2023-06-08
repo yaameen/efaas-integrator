@@ -6,6 +6,7 @@ return [
     'post_logout_url' => env('EFAAS_POST_LOGOUT_URI', 'https://online-services.test/oauth/logout'),
     'redirect_uri' => env('EFAAS_REDIRECT_URI', 'https://online-services.test/oauth/callback'),
     'response_type' => env('EFAAS_RESPONSE_TYPE', 'id_token token'),
+    'post_logout_redirect_uri' => env('EFAAS_POST_LOGOUT_REDIRECT_URI', 'https://online-services.test/oauth/logout'),
     'grant_type' =>  env('EFAAS_GRANT_TYPE', 'authorization_code'),
     'scope' =>  env('EFAAS_SCOPE', 'openid profile'),
 
