@@ -1,26 +1,26 @@
 {
-    "name": "yaameen/efaas-integrator",
-    "description": "eFaas Integration Package",
-    "authors": [
-        {
-            "name": "Yameen Mohamed",
-            "email": "yaamynu@gmail.com"
-        }
-    ],
-    "require": {
-        "illuminate/support": "^8.0",
-        "guzzlehttp/guzzle": "^7.1"
-    },
-    "autoload": {
-        "psr-4": {
-            "eFaasIntegrator\\": "src"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "eFaasIntegrator\\eFaasServiceProvider"
-            ]
-        }
+  "name": "yaameen/efaas-integrator",
+  "description": "eFaas Integration Package",
+  "authors": [
+    {
+      "name": "Yameen Mohamed",
+      "email": "yaamynu@gmail.com"
     }
+  ],
+  "require": {
+    "illuminate/support": "^10.0",
+    "guzzlehttp/guzzle": "^7.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "eFaasIntegrator\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "eFaasIntegrator\\eFaasServiceProvider"
+      ]
+    }
+  }
 }
